@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FairShare Chores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1> FairShare Chores</h1>
+        <p>Distribute chores fairly among your family</p>
+    </header>
+
+    <main>
+
+        <!--SECTION 1: Family Members-->
+        <section id="members-section">
+            <h2>Family Members</h2>
+            <div class="input-row">
+                <input type="text" id="member-input" placeholder="Enter name...">
+                <button id="add-member-btn">Add Member</button>
+            </div>
+            <ul id="members-list"></ul>
+        </section>
+
+        <!-- SECTION 2: Chores -->
+        <section id="chores-section">
+            <h2> Chores</h2>
+            <div class="input-row">
+                <input type="text" id="chore-input" placeholder="Chore name...">
+                <select id="chore-points">
+                    <option value="1">1 point - Easy</option>
+                    <option value="2">2 point - Light</option>
+                    <option value="3">3 point - Medium</option>
+                    <option value="4">4 point - Hard</option>
+                    <option value="5">5 point - Very Hard</option>
+                </select>
+                <button id="add-chore-btn">Add Chore</button>
+            </div>
+            <ul id="chores-list"></ul>
+        </section>
+
+        <!-- SECTION 3: Dashboard -->
+        <section id="dashboard-section">
+        <h2>Dashboard</h2>
+        <button id="assign-btn"> Assign Chores Fairly</button>
+        <div id="dashboard"></div>
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
