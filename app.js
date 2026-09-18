@@ -5,7 +5,7 @@
 //Two arrays hold all data in memory
 let members = [];
 let chores = [];
-
+let currentAssignments = [];
 //===============
 // SAVE & LOAD from localStorage
 //===============
@@ -63,7 +63,7 @@ function renderChores() {
 
         // Crate a remove button for each chore
         const removeBtn = document.createElement('button');
-        removeBtn.textContext = 'Remove';
+        removeBtn.textContent = 'Remove';
         removeBtn.onclick = function() {
             chores = chores.filter(function(c) {
                 return c.id !== chore.id;
@@ -172,12 +172,18 @@ function assignChores() {
         });
 
         // Give this chore to that member
-        lightest.assignedChores.push(chore);
+        lightest.assignedChores.push({
+            id: chore.id,
+            name: chore.name,
+            points: chore.points,
+            completed: false
+        });
         lightest.totalPoints += chore.points;
     });
 
     // Step 4: Show the result on the dashboard
-    renderDashboard(assignments);
+    currentAssignments = assignments;
+    renderDashboard(currentAssignments);
 }
 
 // ==================
@@ -207,6 +213,23 @@ function renderDashboard(assignments) {
             assignment.assignedChores.forEach(function(chore) {
                 const choreItem = document.createElement('p');
                 choreItem.textContent = '- ' + chore.name + ' (' + chore.points + ' pts)';
+            
+                // If completed, cross it out
+                if(chore.completed) {
+                    choreItem.style.textDecoration = 'line-through';
+                    choreItem.style.opacity = '0.5';
+                }
+
+                // Add a Done button
+                const doneBtn = document.createElement('button');
+                doneBtn.className = 'done-btn';
+                doneBtn.textContent = chore.completed ? 'Undo' : 'Done';
+                doneBtn.onclick = function() {
+                    chore.completed = !chore.completed;
+                    renderDashboard(assignments);
+                };
+
+                choreItem.appendChild(doneBtn);
                 card.appendChild(choreItem);
             });
         }
